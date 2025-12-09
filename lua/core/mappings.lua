@@ -24,6 +24,8 @@ vim.keymap.set('n', 'gr', builtin.lsp_references, {noremap = true, silent = true
 vim.keymap.set('n', 'gd', builtin.lsp_definitions, {noremap = true, silent = true})
 
 -- leap
-vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward-to)', { desc = 'Leap forward to' })
-vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>(leap-backward-to)', { desc = 'Leap backward to' })
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)', { desc = 'Leap forward to' })
+vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>(leap-backward)', { desc = 'Leap backward to' })
 vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)', { desc = 'Leap from window' })
+vim.keymap.set('n', 'X', '<Plug>(leap-backward-till)', { desc = 'Leap previous match' })
+vim.keymap.set('n', 'x', '<Plug>(leap-forward-till)', { desc = 'Leap next match' })
