@@ -1,8 +1,8 @@
 -- Basic
-require('core.plugins')
-require('core.mappings')
-require('core.colors')
-require('core.config')
+require("core.plugins")
+require("core.mappings")
+require("core.colors")
+require("core.config")
 -- Plagins
 --require('plugins.neotree')
 --require('plugins.treesitter')
@@ -15,4 +15,3 @@ require('core.config')
 --require('plugins.leap')
 --require('plugins.helm')
 --require('plugins.kube-utils')
-
