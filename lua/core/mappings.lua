@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Сохранить файл" })
+vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Закрыть окно" })
 
 -- NeoTree
 vim.keymap.set("n", "<leader>e", ":Neotree left focus<CR>")

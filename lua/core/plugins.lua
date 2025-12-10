@@ -173,6 +173,9 @@ require("lazy").setup({
 
 				lsp_zero.on_attach(function(client, bufnr)
 					lsp_zero.default_keymaps({ buffer = bufnr })
+					vim.keymap.set("n", "K", function()
+						vim.lsp.buf.hover()
+					end, { buffer = bufnr, desc = "Показать подсказку" })
 				end)
 
 				-- Конфигурация Mason
