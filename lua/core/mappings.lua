@@ -41,3 +41,37 @@ end, { desc = "Format file (Conform)" })
 vim.keymap.set({ "x" }, "<leader>fm", function()
 	conform.format({ async = true, lsp_fallback = true })
 end, { desc = "Format selection (Conform)" })
+
+-- В lua/core/*, где у вас vim.keymap.set(...)
+local gs = require("gitsigns")
+
+-- Gitsigns Mappings
+vim.keymap.set("n", "]c", function()
+	if vim.wo.diff then
+		return "]c"
+	end
+	vim.schedule(function()
+		gs.next_hunk()
+	end)
+	return "<Ignore>"
+end, { expr = true, desc = "Next Hunk" })
+
+vim.keymap.set("n", "[c", function()
+	if vim.wo.diff then
+		return "[c"
+	end
+	vim.schedule(function()
+		gs.prev_hunk()
+	end)
+	return "<Ignore>"
+end, { expr = true, desc = "Prev Hunk" })
+
+-- Команды для работы с текущим изменением (Hunk)
+vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Stage Hunk" })
+vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "Reset Hunk" })
+
+-- Ключевой маппинг: Показать разницу/изменения
+vim.keymap.set("n", "<leader>hp", gs.preview_hunk, { desc = "Preview Hunk (Pop-up)" })
+vim.keymap.set("n", "<leader>hb", function()
+	gs.blame_line({ full = true })
+end, { desc = "Blame Line" })
