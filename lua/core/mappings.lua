@@ -77,4 +77,5 @@ vim.keymap.set("n", "<leader>hp", gs.preview_hunk, { desc = "Preview Hunk (Pop-u
 vim.keymap.set("n", "<leader>hb", function()
 	gs.blame_line({ full = true })
 end, { desc = "Blame Line" })
-vim.keymap.set("n", "<leader>ri", vim.lsp.buf.implementation, { desc = "LSP Implementations" })
+--vim.keymap.set("n", "<leader>ri", vim.lsp.buf.implementation, { desc = "LSP Implementations" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Open Neogit" })
