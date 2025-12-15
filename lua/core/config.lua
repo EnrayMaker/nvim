@@ -8,7 +8,7 @@ vim.opt.wrap = false
 vim.wo.linebreak = true
 vim.opt.virtualedit = "block"
 vim.opt.undofile = true
-vim.opt.shell = "/bin/zsh"
+vim.opt.shell = "/bin/fish"
 
 -- Mouse
 vim.opt.mouse = "a"
