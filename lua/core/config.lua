@@ -67,3 +67,31 @@ vim.opt.smartcase = true -- Если в поиске есть заглавные
 -- vim.cmd([[highlight clear SignColumn]])
 -- vim.opt.cursorline = true
 -- vim.opt.colorcolumn = "80"
+
+-- Добавьте настройки для Python
+vim.g.python3_host_prog = vim.fn.exepath("python3")
+
+-- Автокоманды для работы с Python
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.bo.shiftwidth = 4
+		vim.bo.tabstop = 4
+		vim.bo.softtabstop = 4
+		vim.bo.expandtab = true
+
+		-- Локальные keymaps для Python
+		vim.keymap.set(
+			"n",
+			"<leader>dm",
+			"<cmd>lua require('dap-python').test_method()<cr>",
+			{ buffer = true, desc = "Test Method" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>dc",
+			"<cmd>lua require('dap-python').test_class()<cr>",
+			{ buffer = true, desc = "Test Class" }
+		)
+	end,
+})

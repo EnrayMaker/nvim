@@ -14,7 +14,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 --end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.maplocalleader = "\\"
+--vim.g.maplocalleader = " "
 
 require("lazy").setup({
 	spec = {
@@ -145,6 +145,70 @@ require("lazy").setup({
 						},
 					},
 				})
+			end,
+		},
+		-- python
+		{
+			"mfussenegger/nvim-dap",
+			lazy = true,
+			config = function()
+				local dap = require("dap")
+				-- Базовые настройки
+				vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
+				vim.fn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
+			end,
+		},
+
+		-- Python DAP
+		{
+			"mfussenegger/nvim-dap-python",
+			ft = "python",
+			dependencies = { "mfussenegger/nvim-dap" },
+			config = function()
+				require("dap-python").setup("python3")
+				require("dap-python").test_runner = "pytest"
+			end,
+		},
+		{ "nvim-neotest/nvim-nio" },
+		-- DAP UI (опционально, но удобно)
+		{
+			"rcarriga/nvim-dap-ui",
+			dependencies = { "mfussenegger/nvim-dap" },
+			lazy = true,
+			config = function()
+				require("dapui").setup()
+				local dap = require("dap")
+				local dapui = require("dapui")
+				dap.listeners.after.event_initialized["dapui_config"] = function()
+					dapui.open()
+				end
+				dap.listeners.before.event_terminated["dapui_config"] = function()
+					dapui.close()
+				end
+				dap.listeners.before.event_exited["dapui_config"] = function()
+					dapui.close()
+				end
+			end,
+		},
+
+		-- Выбор виртуального окружения Python
+		{
+			"linux-cultist/venv-selector.nvim",
+			ft = "python",
+			dependencies = {
+				"neovim/nvim-lspconfig",
+				"nvim-telescope/telescope.nvim",
+				"mfussenegger/nvim-dap-python",
+			},
+			opts = {
+				name = { "venv", ".venv", "env", ".env" }, -- Имена папок с venv
+				auto_refresh = true,
+			},
+			keys = {
+				{ "<leader>lv", "<cmd>VenvSelect<cr>", desc = "Select Virtual Env" },
+			},
+			config = function(_, opts)
+				require("venv-selector").setup(opts)
 			end,
 		},
 		{ "tpope/vim-fugitive" }, -- Доступ к гит командам

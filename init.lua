@@ -1,8 +1,11 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- Basic
 require("core.plugins")
-require("core.mappings")
 require("core.colors")
 require("core.config")
+require("core.mappings")
 -- Plagins
 --require('plugins.neotree')
 --require('plugins.treesitter')
