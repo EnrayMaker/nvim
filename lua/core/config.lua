@@ -75,23 +75,6 @@ vim.g.python3_host_prog = vim.fn.exepath("python3")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
-		vim.bo.shiftwidth = 4
-		vim.bo.tabstop = 4
-		vim.bo.softtabstop = 4
-		vim.bo.expandtab = true
-
-		-- Локальные keymaps для Python
-		vim.keymap.set(
-			"n",
-			"<leader>dm",
-			"<cmd>lua require('dap-python').test_method()<cr>",
-			{ buffer = true, desc = "Test Method" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>dc",
-			"<cmd>lua require('dap-python').test_class()<cr>",
-			{ buffer = true, desc = "Test Class" }
-		)
+		vim.bo.commentstring = "# %s"
 	end,
 })

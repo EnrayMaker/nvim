@@ -76,7 +76,20 @@ require("lazy").setup({
 		},
 
 		-- Telescope
-		{ "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" } },
+		{
+			"nvim-telescope/telescope.nvim",
+			branch = "main",
+			dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
+			config = function()
+				require("telescope").setup({
+					defaults = {
+						preview = {
+							treesitter = false, -- отключить treesitter для preview
+						},
+					},
+				})
+			end,
+		},
 
 		-- conform.nvim
 		{
@@ -136,14 +149,10 @@ require("lazy").setup({
 					},
 				})
 				vim.diagnostic.config({
-					signs = {
-						text = {
-							[vim.diagnostic.severity.ERROR] = "",
-							[vim.diagnostic.severity.WARN] = "",
-							[vim.diagnostic.severity.INFO] = "",
-							[vim.diagnostic.severity.HINT] = "󰌵",
-						},
-					},
+					virtual_text = true,
+					update_in_insert = false,
+					underline = true,
+					severity_sort = true,
 				})
 			end,
 		},
@@ -212,8 +221,6 @@ require("lazy").setup({
 			end,
 		},
 		{ "tpope/vim-fugitive" }, -- Доступ к гит командам
-		{ "pearofducks/ansible-vim" },
-		{ "hashivim/vim-terraform" },
 		{
 			"folke/trouble.nvim",
 			opts = {},
