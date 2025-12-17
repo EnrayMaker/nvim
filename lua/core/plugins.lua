@@ -1,30 +1,15 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
---if not (vim.uv or vim.loop).fs_stat(lazypath) then
---	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
---	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
---	if vim.v.shell_error ~= 0 then
---		vim.api.nvim_echo({
---			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
---			{ out, "WarningMsg" },
---			{ "\nPress any key to exit..." },
---		}, true, {})
---		vim.fn.getchar()
---		os.exit(1)
---	end
---end
 vim.opt.rtp:prepend(lazypath)
 
 --vim.g.maplocalleader = " "
 
 require("lazy").setup({
 	spec = {
-		-- Основные
 		{ "ggandor/leap.nvim", opts = {} }, -- Конфигурация Leap
 		{
 			"nvim-treesitter/nvim-treesitter",
 			branch = "main",
 			build = ":TSUpdate",
-			lazy = false,
 			opts = {
 				ensure_installed = { "lua", "python", "cpp", "yaml", "bash" },
 				sync_install = false,
@@ -36,9 +21,7 @@ require("lazy").setup({
 		-- NeoTree
 		{
 			"nvim-neo-tree/neo-tree.nvim",
-			branch = "v3.x",
 			dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim", "nvim-tree/nvim-web-devicons" },
-			lazy = false,
 			opts = {
 				window = {
 					position = "left",
@@ -78,8 +61,7 @@ require("lazy").setup({
 		-- Telescope
 		{
 			"nvim-telescope/telescope.nvim",
-			branch = "main",
-			dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
+			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
 				require("telescope").setup({
 					defaults = {
@@ -178,7 +160,6 @@ require("lazy").setup({
 				require("dap-python").test_runner = "pytest"
 			end,
 		},
-		{ "nvim-neotest/nvim-nio" },
 		-- DAP UI (опционально, но удобно)
 		{
 			"rcarriga/nvim-dap-ui",
@@ -220,7 +201,6 @@ require("lazy").setup({
 				require("venv-selector").setup(opts)
 			end,
 		},
-		{ "tpope/vim-fugitive" }, -- Доступ к гит командам
 		{
 			"folke/trouble.nvim",
 			opts = {},
@@ -258,7 +238,6 @@ require("lazy").setup({
 				},
 			},
 		},
-		{ "echasnovski/mini.nvim" },
 		{ "mrjosh/helm-ls", ft = "helm" },
 		-- kube-utils
 		{
