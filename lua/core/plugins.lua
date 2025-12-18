@@ -11,7 +11,7 @@ require("lazy").setup({
 			branch = "main",
 			build = ":TSUpdate",
 			opts = {
-				ensure_installed = { "lua", "python", "cpp", "yaml", "bash" },
+				ensure_installed = { "lua", "python", "cpp", "yaml", "bash", "cmake" },
 				sync_install = false,
 				auto_install = true,
 				highlight = { enable = true },
@@ -244,6 +244,33 @@ require("lazy").setup({
 			"h4ckm1n-dev/kube-utils-nvim",
 			dependencies = { "nvim-telescope/telescope.nvim" },
 			lazy = true,
+		},
+		{
+			"Civitasv/cmake-tools.nvim",
+			ft = { "cpp", "c", "cmake" },
+			opts = {
+				cmake_command = "cmake",
+				cmake_build_directory = "build", -- Все билды идут в папку `build`
+				cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- Важно для LSP
+				cmake_runner = {
+					name = "terminal", -- Запускать программу в терминале Neovim
+					opts = {
+						terminal = {
+							name = "CMakeRunner",
+							prefix_name = "[CMakeTools]: ",
+							split_direction = "horizontal",
+							split_size = 11,
+						},
+					},
+				},
+				cmake_notifications = {
+					runner = { enabled = true },
+					executor = { enabled = true },
+				},
+			},
+			config = function(_, opts)
+				require("cmake-tools").setup(opts)
+			end,
 		},
 	},
 	checker = { enabled = true },

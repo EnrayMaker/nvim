@@ -172,3 +172,97 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "[T]ab [N]ew" })
 vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>", { desc = "[T]ab [C]lose" })
 vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
+
+-- lua/core/mappings.lua
+-- Ключевые команды для работы с CMake
+vim.keymap.set("n", "<leader>cg", "<cmd>CMakeGenerate<CR>", { desc = "[C]Make [G]enerate" })
+vim.keymap.set("n", "<leader>cb", "<cmd>CMakeBuild<CR>", { desc = "[C]Make [B]uild" })
+vim.keymap.set("n", "<leader>cr", "<cmd>CMakeRun<CR>", { desc = "[C]Make [R]un" })
+vim.keymap.set("n", "<leader>cc", "<cmd>CMakeClean<CR>", { desc = "[C]Make [C]lean" })
+vim.keymap.set("n", "<leader>cs", "<cmd>CMakeStop<CR>", { desc = "[C]Make [S]top running program" })
+vim.keymap.set("n", "<leader>csq", "<cmd>CMakeClose<CR>", { desc = "[C]Make [S]top and [Q]uit runner" })
+
+-- Удобное меню для быстрого выбора действия
+vim.keymap.set("n", "<leader>cm", function()
+	local actions = {
+		{
+			"🚀  Generate & Build",
+			function()
+				vim.cmd("CMakeGenerate")
+				-- Ждем немного перед сборкой
+				vim.defer_fn(function()
+					vim.cmd("CMakeBuild")
+				end, 500)
+			end,
+		},
+		{
+			"🔨  Build",
+			function()
+				vim.cmd("CMakeBuild")
+			end,
+		},
+		{
+			"▶️   Run",
+			function()
+				vim.cmd("CMakeRun")
+			end,
+		},
+		{
+			"⏹️   Stop",
+			function()
+				vim.cmd("CMakeStop")
+			end,
+		},
+		{
+			"🧹  Clean",
+			function()
+				vim.cmd("CMakeClean")
+			end,
+		},
+		{
+			"⚙️   Select Build Type",
+			function()
+				vim.cmd("CMakeSelectBuildType")
+			end,
+		},
+		{
+			"🎯  Select Target",
+			function()
+				vim.cmd("CMakeSelectTarget")
+			end,
+		},
+		{
+			"📋  Configure Arguments",
+			function()
+				vim.cmd("CMakeConfigure")
+			end,
+		},
+		{
+			"🗑️   Clean & Rebuild",
+			function()
+				vim.cmd("CMakeClean")
+				vim.defer_fn(function()
+					vim.cmd("CMakeBuild")
+				end, 300)
+			end,
+		},
+		{
+			"🔍  Select Launch Target",
+			function()
+				vim.cmd("CMakeSelectLaunchTarget")
+			end,
+		},
+	}
+
+	vim.ui.select(actions, {
+		prompt = "CMake Actions:",
+		format_item = function(item)
+			return item[1]
+		end,
+	}, function(choice)
+		if choice then
+			-- Вызываем функцию, а не строку команды
+			choice[2]()
+		end
+	end)
+end, { desc = "[C]Make [M]enu" })
