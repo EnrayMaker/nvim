@@ -210,7 +210,7 @@ vim.keymap.set("n", "<leader>cm", function()
 		{
 			"⏹️   Stop",
 			function()
-				vim.cmd("CMakeStop")
+				vim.cmd("CMakeStopRunner")
 			end,
 		},
 		{

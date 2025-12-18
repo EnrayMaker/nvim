@@ -248,28 +248,31 @@ require("lazy").setup({
 		{
 			"Civitasv/cmake-tools.nvim",
 			ft = { "cpp", "c", "cmake" },
-			opts = {
-				cmake_command = "cmake",
-				cmake_build_directory = "build", -- Все билды идут в папку `build`
-				cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- Важно для LSP
-				cmake_runner = {
-					name = "terminal", -- Запускать программу в терминале Neovim
-					opts = {
-						terminal = {
-							name = "CMakeRunner",
-							prefix_name = "[CMakeTools]: ",
-							split_direction = "horizontal",
-							split_size = 11,
-						},
-					},
-				},
-				cmake_notifications = {
-					runner = { enabled = true },
-					executor = { enabled = true },
-				},
+			lazy = false,
+			dependencies = {
+				"nvim-lua/plenary.nvim",
 			},
-			config = function(_, opts)
-				require("cmake-tools").setup(opts)
+			config = function()
+				require("cmake-tools").setup({
+					cmake_command = "cmake",
+					cmake_build_directory = "build",
+					cmake_build_directory_prefix = "build/",
+					cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
+					cmake_build_options = {},
+					cmake_console_size = 10,
+					cmake_show_console = "always",
+					cmake_dap_configuration = {
+						name = "cpp",
+						type = "codelldb",
+						request = "launch",
+						stopOnEntry = false,
+						runInTerminal = false,
+					},
+					cmake_variants_message = {
+						short = { show = true },
+						long = { show = true, max_length = 40 },
+					},
+				})
 			end,
 		},
 	},
