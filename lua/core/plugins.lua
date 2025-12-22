@@ -18,6 +18,19 @@ require("lazy").setup({
 				indent = { enable = true },
 			},
 		},
+		{
+			"numToStr/Comment.nvim",
+			opts = {},
+			lazy = false,
+		},
+		{
+			"stevearc/oil.nvim",
+			opts = {},
+			-- В зависимости от настроек, можно вызывать по <leader>-e
+			keys = {
+				{ "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
+			},
+		},
 		-- NeoTree
 		{
 			"nvim-neo-tree/neo-tree.nvim",

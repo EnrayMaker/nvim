@@ -3,6 +3,9 @@ vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Закрыть окно" })
 
 -- NeoTree
 vim.keymap.set("n", "<leader>e", ":Neotree left focus<CR>")
+-- terminal
+vim.keymap.set("n", "<leader>tt", ":terminal<CR>", { desc = "Open terminal" })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 -- telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", function()
@@ -174,7 +177,6 @@ vim.keymap.set("n", "<leader>t]", "<cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>t[", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
 
 -- lua/core/mappings.lua
--- Ключевые команды для работы с CMake
 vim.keymap.set("n", "<leader>cg", "<cmd>CMakeGenerate<CR>", { desc = "[C]Make [G]enerate" })
 vim.keymap.set("n", "<leader>cb", "<cmd>CMakeBuild<CR>", { desc = "[C]Make [B]uild" })
 vim.keymap.set("n", "<leader>cr", "<cmd>CMakeRun<CR>", { desc = "[C]Make [R]un" })
@@ -182,7 +184,7 @@ vim.keymap.set("n", "<leader>cc", "<cmd>CMakeClean<CR>", { desc = "[C]Make [C]le
 vim.keymap.set("n", "<leader>cs", "<cmd>CMakeStop<CR>", { desc = "[C]Make [S]top running program" })
 vim.keymap.set("n", "<leader>csq", "<cmd>CMakeClose<CR>", { desc = "[C]Make [S]top and [Q]uit runner" })
 
--- Удобное меню для быстрого выбора действия
+--c++
 vim.keymap.set("n", "<leader>cm", function()
 	local actions = {
 		{
