@@ -157,10 +157,10 @@ vim.keymap.set("n", "<leader>ll", function()
 end, { desc = "Toggle LSP diagnostic signs" })
 
 -- moving
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to down window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to up window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+vim.keymap.set("n", "<S-h>", "<C-w>h", { desc = "Go to left window" })
+vim.keymap.set("n", "<S-j>", "<C-w>j", { desc = "Go to down window" })
+vim.keymap.set("n", "<S-k>", "<C-w>k", { desc = "Go to up window" })
+vim.keymap.set("n", "<S-l>", "<C-w>l", { desc = "Go to right window" })
 
 vim.keymap.set("n", "<A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease width" })
 vim.keymap.set("n", "<A-j>", "<cmd>resize -2<cr>", { desc = "Decrease height" })
